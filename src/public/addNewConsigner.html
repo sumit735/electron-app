@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Manage Consigner</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" integrity="sha512-RXf+QSDCUQs5uwRKaDoXt55jygZZm2V++WUZduaU/Ui/9EGp3f/2KZVahFZBKGH0s774sd3HmrhUy+SgOFQLVQ==" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="./renderer/renderrer.js"></script>
+    <link rel="stylesheet" href="./renderer.css">
+    <link href="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+    <script src="https://unpkg.com/vanilla-datatables@latest/dist/vanilla-dataTables.min.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="customSpace">
+        <h1 class="text-center text-white">Manage Consigners</h1>
+    </div>
+    <div class="mt-2 error container"></div>
+    <div class="container mt-4">
+        <form id="addConsignerForm" action="#" method="post">
+            <input type="hidden" name="id" required class="form-control" id="id">
+            <div class="mb-3">
+                <label for="gstin" class="form-label">GSTIN</label>
+                <input type="text" name="gstin" required class="form-control" id="gstin" placeholder="Enter GST Number">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Consigner Name</label>
+                <input type="text" name="consignerName" required class="form-control" id="name" placeholder="Enter Consigner Name">
+            </div>
+            <div class="mb-3">
+                <label for="address" class="form-label">Address</label>
+                <input type="text" name="address" required class="form-control" id="address" placeholder="Enter Consigner Address">
+            </div>
+            <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" name="city" required class="form-control" id="city" placeholder="Enter City Name">
+            </div>
+            <div class="mb-3">
+                <label for="state" class="form-label">State</label>
+                <input type="text" name="state" required class="form-control" id="state" placeholder="Enter State">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="number" name="phone" required class="form-control" id="phone" placeholder="Enter Phone Number">
+            </div>
+            
+            <div class="mb-3 d-grid gap-2">
+                <input type="submit" class="btn btn-lg btn-success" value="Save">
+            </div>
+        </form>
+    </div>
+    <script src="./renderer/addNewConsigner.js"></script>
+</body>
+</html>

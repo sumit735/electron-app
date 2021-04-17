@@ -1,0 +1,88 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  margin: auto;
+  max-width: 38rem;
+  padding: 2rem;
+  overflow-x: hidden;
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom {
+  align-items: center;
+  max-width: 50%;
+  padding: 1rem;
+  font-size: 1.5rem;
+  background: #079992 !important;
+  color: #fff;
+  cursor: pointer;
+}
+
+.custom:hover {
+  background: #38ada9 !important;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+.customSpace {
+  width: 100%;
+  height: 10rem;
+  background-color: #079992;
+  border-radius: 0 0 5px 5px;
+}
+#add {
+  font-size: 1.5rem;
+  /* margin-top: 2.3rem; */
+  cursor: pointer;
+
+}
+
+.custom {
+  padding: 8px;
+  background: #079992;
+  color: #fff;
+  font-size: 1.3rem;
+  border-radius: 5px;
+}
+.icon {
+  margin-left: 1rem;
+}
+span {
+  margin-left: 1rem;
+}
+.radio {
+  display: inline;
+}
+
+textarea {
+  width: 100%;
+  border-top: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  color: #079992;
+  font-size: 1.3rem;
+  min-height: 92px;
+  max-height: 92px;
+}
+textarea:focus {
+  outline: none !important;
+  border-color: #079992;
+  box-shadow: 0 0 10px #079992;
+}
+canvas#signature {
+  border: 2px solid black;
+}
+.btn-success {
+  background-color: #1dd1a1;
+}
+
+.btn-success:hover {
+  background-color: #10ac84;
+}

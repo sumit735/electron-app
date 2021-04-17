@@ -1,0 +1,4 @@
+{error: 'db not found', errType: 'nodb', errCode: '0001'}
+{error: 'Sorry! Something went wrong', errType = 'dbRelated', errCode: '0002'}
+{message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+{message: 'Updated Successfully', errType: '', errCode: 2000}
