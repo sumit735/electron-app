@@ -152,15 +152,15 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="freightTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="freightTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateFreightCharges()" class="form-control" id="freightTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="freightGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="freightGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateFreightCharges()" class="form-control" id="freightGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="freightTotal" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="freightTotal" placeholder="Enter In Rupees" readonly>
+                            <input type="number" onchange="calculateTotalAmount()" class="form-control" id="freightTotal" placeholder="Enter In Rupees" readonly>
                         </div>
                     </div>
                 </div>
@@ -171,15 +171,15 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="labourTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="labourTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateLabourCharges()" class="form-control" id="labourTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="labourGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="labourGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateLabourCharges()" class="form-control" id="labourGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="labourTotal" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="labourTotal" placeholder="Enter In Rupees" readonly>
+                            <input type="number" readonly onchange="calculateTotalAmount()" class="form-control" id="labourTotal" placeholder="Enter In Rupees" >
                         </div>
                     </div>
                 </div>
@@ -190,15 +190,15 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="loadingTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="loadingTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateLoadingCharges()" class="form-control" id="loadingTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="loadingGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="loadingGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateLoadingCharges()" class="form-control" id="loadingGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="loadingTotal" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="loadingTotal" placeholder="Enter In Rupees" readonly>
+                            <input type="number" onchange="calculateTotalAmount()" class="form-control" id="loadingTotal" placeholder="Enter In Rupees" readonly>
                         </div>
                     </div>
                 </div>
@@ -209,15 +209,15 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="UnloadingTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="UnloadingTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateUnloadingCharges()" class="form-control" id="UnloadingTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="UnloadingGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="UnloadingGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateUnloadingCharges()" class="form-control" id="UnloadingGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="UnloadingTotal" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="UnloadingTotal" placeholder="Enter In Rupees" readonly>
+                            <input type="number" onchange="calculateTotalAmount()" class="form-control" id="UnloadingTotal" placeholder="Enter In Rupees" readonly>
                         </div>
                     </div>
                 </div>
@@ -228,11 +228,11 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="PackagingTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="PackagingTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculatePackagingCharges()" class="form-control" id="PackagingTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="PackagingGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="PackagingGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculatePackagingCharges()" class="form-control" id="PackagingGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="PackagingTotal" class="form-label">Amount</label>
@@ -247,11 +247,11 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="UnpackagingTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="UnpackagingTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateUnpackagingCharges()" class="form-control" id="UnpackagingTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="UnpackagingGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="UnpackagingGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateUnpackagingCharges()" class="form-control" id="UnpackagingGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="UnpackagingTotal" class="form-label">Amount</label>
@@ -266,11 +266,11 @@
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
                             <label for="OtherTaxable" class="form-label">Taxable Amount</label>
-                            <input type="number" class="form-control" id="OtherTaxable" placeholder="Enter Taxable Amount In Rupees" readonly>
+                            <input type="number" onkeyup="calculateOtherCharges()" class="form-control" id="OtherTaxable" placeholder="Enter Taxable Amount In Rupees" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="OtherGst" class="form-label">GST In %</label>
-                            <input type="number" class="form-control" id="OtherGst" placeholder="Enter GST In %" readonly>
+                            <input type="number" onkeyup="calculateOtherCharges()" class="form-control" id="OtherGst" placeholder="Enter GST In %" >
                         </div>
                         <div class="col-md-4 col-sm-4">
                             <label for="OtherTotal" class="form-label">Amount</label>
@@ -282,25 +282,25 @@
             <div class="row mb-3">
                 <label class="custom mb-2" for="dharmakanta"><i class="icon fas fa-truck-moving"></i><span>Dharmakanta Amount</span></label>
                 <div id="dharmakanta" class="mt-2 mb-3 col-md-12 col-sm-12">
-                    <input type="number" class="form-control" id="dharmakantaAmt" placeholder="Enter In Rupees" readonly>
+                    <input type="number" class="form-control" id="dharmakantaAmt" placeholder="Enter In Rupees" >
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="custom mb-2" for="total"><i class="icon fas fa-truck-moving"></i><span>Total Amount</span></label>
                 <div id="total" class="mt-2 mb-3 col-md-12 col-sm-12">
-                    <input type="number" class="form-control" id="totalAmt" placeholder="Enter In Rupees" readonly>
+                    <input type="number" class="form-control" id="totalAmt" placeholder="Enter In Rupees" >
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="custom mb-2" for="advance"><i class="icon fas fa-truck-moving"></i><span>Advance Amount</span></label>
                 <div id="advance" class="mt-2 mb-3 col-md-12 col-sm-12">
-                    <input type="number" class="form-control" id="advanceAmt" placeholder="Enter In Rupees" readonly>
+                    <input type="number" class="form-control" id="advanceAmt" placeholder="Enter In Rupees" >
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="custom mb-2" for="payable"><i class="icon fas fa-truck-moving"></i><span>Payable Amount</span></label>
                 <div id="payable" class="mt-2 mb-3 col-md-12 col-sm-12">
-                    <input type="number" class="form-control" id="payableAmt" placeholder="Enter In Rupees" readonly>
+                    <input type="number" class="form-control" id="payableAmt" placeholder="Enter In Rupees" >
                 </div>
             </div>
             <div class="row mb-3">
@@ -308,15 +308,15 @@
                 <div id="freightPaidBy" class="mb-3 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="freightPaidBy" type="radio" id="consigner" readonly>
+                            <input class="form-check-input" name="freightPaidBy" type="radio" id="consigner" >
                             <label for="consigner" class="form-label">Consigner</label>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="freightPaidBy" type="radio" id="consignee" readonly>
+                            <input class="form-check-input" name="freightPaidBy" type="radio" id="consignee" >
                             <label for="consignee" class="form-label">consignee</label>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="freightPaidBy" type="radio" id="agent" readonly>
+                            <input class="form-check-input" name="freightPaidBy" type="radio" id="agent" >
                             <label for="agent" class="form-label">Agent</label>
                         </div>
                     </div>
@@ -327,15 +327,15 @@
                 <div id="gstPaidBy" class="mb-3 col-md-12 col-sm-12">
                     <div class="row">
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="gstPaidBy" type="radio" id="consigner" readonly>
+                            <input class="form-check-input" name="gstPaidBy" type="radio" id="consigner" >
                             <label for="consigner" class="form-label">Consigner</label>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="gstPaidBy" type="radio" id="consignee" readonly>
+                            <input class="form-check-input" name="gstPaidBy" type="radio" id="consignee" >
                             <label for="consignee" class="form-label">consignee</label>
                         </div>
                         <div class="col-md-4 col-sm-4">
-                            <input class="form-check-input" name="gstPaidBy" type="radio" id="agent" readonly>
+                            <input class="form-check-input" name="gstPaidBy" type="radio" id="agent" >
                             <label for="agent" class="form-label">Agent</label>
                         </div>
                     </div>
@@ -373,27 +373,27 @@
                     <div class="optedInsuranceTrue row mb-3 mt-2">
                         <div class="mb-3 mb-3 col-md-6 col-sm-6">
                             <label for="insuranceCompName">Insurance Company Name</label>
-                            <input type="number" class="form-control" id="insuranceCompName" placeholder="Enter Insurance Company Name" readonly>
+                            <input type="number" class="form-control" id="insuranceCompName" placeholder="Enter Insurance Company Name" >
                         </div>
                         <div class="mb-3 mb-3 col-md-6 col-sm-6">
                             <label for="insurancePolicy">Insurance Policy</label>
-                            <input type="number" class="form-control" id="insurancePolicy" placeholder="Enter Insurance Policy Number" readonly>
+                            <input type="number" class="form-control" id="insurancePolicy" placeholder="Enter Insurance Policy Number" >
                         </div>
                         <div class="mb-3 mb-3 col-md-6 col-sm-6">
                             <label for="insuranceAmt">Insurance Amount</label>
-                            <input type="number" class="form-control" id="insuranceAmt" placeholder="Enter Insurance Amount In R.S" readonly>
+                            <input type="number" class="form-control" id="insuranceAmt" placeholder="Enter Insurance Amount In R.S" >
                         </div>
                         <div class="mb-3 mb-3 col-md-6 col-sm-6">
                             <label for="insuranceRisk">Risk</label>
-                            <input type="number" class="form-control" id="insuranceRisk" value="Low" readonly>
+                            <input type="number" class="form-control" id="insuranceRisk" value="Low" >
                         </div>
                         <div class="mt-3 col-md-12 col-sm-12">
                             <div class="radio" style="margin-right: 2rem;">
-                                <input class="form-check-input" name="risk" type="radio" id="lowRisk" readonly>
+                                <input class="form-check-input" name="risk" type="radio" id="lowRisk" >
                                 <label for="lowRisk" class="form-label">Low</label>
                             </div>
                             <div class="radio">
-                                <input class="form-check-input" name="risk" type="radio" id="highRisk" readonly>
+                                <input class="form-check-input" name="risk" type="radio" id="highRisk" >
                                 <label for="highRisk" class="form-label">High</label>
                             </div>
                         </div>
@@ -401,10 +401,10 @@
                     <div class="row mb-3">
                         <label class="custom mb-2" for="addressDel"><i class="icon fas fa-map-marker-alt"></i><span>Address Of Delivery</span></label>
                         <div class="mt-3 col-md-6 col-sm-6">
-                            <input type="text" class="form-control" id="addressOfDelivery" placeholder="Enter Address Of Delivery" readonly>
+                            <input type="text" class="form-control" id="addressOfDelivery" placeholder="Enter Address Of Delivery" >
                         </div>
                         <div class="mt-3 col-md-6 col-sm-6">
-                            <input class="form-check-input" name="setConsigneeAdd" type="checkbox" id="setConsigneeAdd" readonly>
+                            <input class="form-check-input" name="setConsigneeAdd" type="checkbox" id="setConsigneeAdd" >
                             <label for="setConsigneeAdd" class="form-label">Same As Consignee</label>
                         </div>
                     </div>

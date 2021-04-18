@@ -1,4 +1,4 @@
-const { getAllconsignees, editconsignee, addConsigneeDb, deleteconsignee }  = require('../knex');
+const { getAllconsignees, addConsigneeDb, deleteconsignee }  = require('../knex');
 const remote = require('@electron/remote');
 
 

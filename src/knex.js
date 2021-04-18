@@ -246,13 +246,142 @@ const addConsigneeDb = (consignee) => {
   });
 }
 
-
-const editconsignee = (id, consignee) => {
-  // edit consignee
-}
-
 const deleteconsignee = (id) => {
   // delete consignee
+  console.log('delete id is ', id);
+  return new Promise( (resolve, reject) => {
+    dbOpen();
+    db.get('consignees', function (err, value) {
+      if (err) {
+        dbClose();
+        reject(
+          {message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+        ); 
+      }
+      console.log('filter', id);
+      let updatedDb = value.filter((consignee) => {
+        return consignee.id !== id.toString();
+      });
+      console.log('updated db is ', updatedDb);
+      db.put('consignees', updatedDb, function (err) {
+        if (err) {
+          dbClose();
+          reject(
+            {message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+          ); 
+        }
+        dbClose();
+        resolve({message: 'Deleted Successfully', errType: '', errCode: 2000, updatedDb});
+      });
+    });
+  });
+}
+// =================================
+// Product========================
+// =================================
+
+const getAllProducts = () => {
+  // fetch all Products
+  return new Promise((resolve, reject) => {
+    dbOpen();
+    db.get('products', function (err, value) {
+      if (err) {
+        dbClose();
+        if(err.notFound) {
+          reject(
+            {message: 'No Data Available. Add one to Continue', errType: 'nodb', errCode: 0001, error: err}
+          );
+        } else {
+          return reject({message: 'Sorry! Something went wrong', errType: 'dbRelated', errCode: 0002, error: err});
+        }
+      } 
+      
+      dbClose();
+      resolve(value);
+    });
+  });
+}
+
+const getProductById = (id) => {
+  // get single Product
+  return new Promise((resolve, reject) => {
+    dbOpen();
+    db.get('products', function (err, value) {
+      if (err) {
+        dbClose();
+        if(err.notFound) {
+          reject(
+            {message: 'No Data Available. Add one to Continue', errType: 'nodb', errCode: 0001, error: err}
+          );
+        } else {
+          return reject({message: 'Sorry! Something went wrong', errType: 'dbRelated', errCode: 0002, error: err});
+        }
+      } 
+      
+      dbClose();
+      let productDetails = value.filter((product) => {
+        console.log(product);
+        // console.log(Product);
+        if(product.id === id.toString()) {
+          return product;
+        }
+      });
+      if(productDetails) {
+        resolve(productDetails);
+      } else {
+        reject({message: 'Sorry! No Data Exist', errType: 'noData', errCode: 4040})
+      }
+    });
+  });
+}
+
+const addProductDb = (products) => {
+  // add a Product
+  console.log(products);
+  return new Promise((resolve, reject) => {
+    dbOpen();
+    db.put('products', products, function (err) {
+      if (err) {
+        dbClose();
+        reject(
+          {message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+        ); 
+      }
+      dbClose();
+      resolve({message: 'Added Successfully', errType: '', errCode: 2000, products});
+    });
+  });
+}
+
+const deleteProduct = (id) => {
+  // delete Product
+  console.log('delete id is ', id);
+  return new Promise( (resolve, reject) => {
+    dbOpen();
+    db.get('products', function (err, value) {
+      if (err) {
+        dbClose();
+        reject(
+          {message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+        ); 
+      }
+      console.log('filter', id);
+      let updatedDb = value.filter((product) => {
+        return product.id !== id.toString();
+      });
+      console.log('updated db is ', updatedDb);
+      db.put('products', updatedDb, function (err) {
+        if (err) {
+          dbClose();
+          reject(
+            {message: 'Failed To Perform Operation. Please Contact Developer', errType: 'insertionError', errCode: 5000, error: err}
+          ); 
+        }
+        dbClose();
+        resolve({message: 'Deleted Successfully', errType: '', errCode: 2000, updatedDb});
+      });
+    });
+  });
 }
 
 
@@ -268,7 +397,10 @@ module.exports = {
   getAllconsignees,
   getConsgineeById,
   addConsigneeDb,
-  editconsignee,
-  deleteconsignee
+  deleteconsignee,
+  getAllProducts,
+  addProductDb,
+  deleteProduct,
+  getProductById
 }
 

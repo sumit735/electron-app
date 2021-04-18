@@ -144,15 +144,56 @@ ipcMain.on('renderer', (evt, message) => {
     // and load the index.html of the app.
     addWindow.loadFile(path.join(__dirname, '/public/addTransport.html'));
   }
+  if(message == 'viewProduct') {
+    viewProducts = new BrowserWindow({
+      width: 1280,
+      height: 720,
+      minHeight: 700,
+      minWidth: 1200,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    });
+  
+    // and load the index.html of the app.
+    viewProducts.loadFile(path.join(__dirname, '/public/viewProduct.html'));
+  }
+  if(message == 'addNewProduct') {
+    addNewProduct = new BrowserWindow({
+      width: 500,
+      height: 700,
+      minHeight: 500,
+      minWidth: 700,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    });
+  
+    // and load the index.html of the app.
+    addNewProduct.loadFile(path.join(__dirname, '/public/addNewProduct.html'));
+  }
 
   if(message.type == 'selectConsigner') {
     viewConsigner.close();
     addReceiptWindow.webContents.send('oldConsignerDetails', message);
   }
   if(message.type == 'selectconsignee') {
-    console.log('inside');
     viewconsignee.close();
     addReceiptWindow.webContents.send('oldConsigneeDetails', message);
+  }
+  if(message.type == 'selectProduct') {
+    viewProducts.close();
+    addReceiptWindow.webContents.send('oldProductDetails', message);
   }
 
 });
@@ -171,6 +212,10 @@ ipcMain.on('consignerDetails', (event, consignerPayload) => {
 ipcMain.on('consigneeDetails', (event, consigneePayload) => {
   viewconsignee.close();
   addReceiptWindow.webContents.send('consigneeDetails', consigneePayload);
+});
+ipcMain.on('productDetails', (event, productPayload) => {
+  viewProducts.close();
+  addReceiptWindow.webContents.send('productDetails', productPayload);
 });
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
