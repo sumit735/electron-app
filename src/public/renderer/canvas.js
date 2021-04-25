@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var canvas = document.getElementById("signature");
       var ctx = canvas.getContext("2d");
       ctx.strokeStyle = "#222222";
-      ctx.lineWidth = 4;
+      ctx.lineWidth = 2;
     
       var drawing = false;
       var mousePos = {
@@ -110,16 +110,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
       (function drawLoop() {
         requestAnimFrame(drawLoop);
         renderCanvas();
+        // Set up the UI
+        var sigImage = document.getElementById("signImage");
+        var dataUrl = canvas.toDataURL('image/png');
+        sigImage.setAttribute("src", dataUrl);
       })();
     
       
     
-      // Set up the UI
-    //   var sigText = document.getElementById("sig-dataUrl");
-      var sigImage = document.getElementById("signImage");
-      var dataUrl = canvas.toDataURL();
-    // sigText.innerHTML = dataUrl;
-    sigImage.setAttribute("src", dataUrl);
+      
     
 
 })

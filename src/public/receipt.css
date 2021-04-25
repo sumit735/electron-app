@@ -1,0 +1,174 @@
+@font-face {
+    font-family: 'merriweather';
+    src: url('./dist/merriweather/Merriweather-Black.ttf'); /* IE9 Compat Modes */
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+    overflow: visible
+}
+
+body {
+    font-family: merriweather;
+    font-size: 0.9rem;
+}
+
+.number {
+    font-family: var(--bs-font-sans-serif);
+    font-weight: bold;
+}
+
+.border {
+    display: inline;
+    /* padding: 1rem; */
+    border: 0 !important;
+    /* border-radius: 5px; */
+    /* width: 3rem; */
+}
+
+.printer {
+    width: 8.5in;
+    min-height: 11in;
+    margin: 1rem;
+
+}
+.right {
+    font-size: 2rem;
+    color: #079992;
+}
+.down {
+    margin-bottom: 2rem;
+}
+.sl {
+    margin-left: 1rem;
+}
+.spacing {
+    padding: 5px;
+}
+@page {
+    size: A4;
+    margin: 0;
+    border: 1px solid #079992;
+}
+@page :right {
+    margin-right: 1rem;
+    /* margin-left: 1rem; */
+ }
+p {
+    margin: 0;
+}
+.bold {
+    font-weight: bold;
+}
+.text-right {
+    text-align: right!important;
+}
+.text-left {
+    text-align: left!important;
+}
+.fromTo {
+    padding: 1rem;
+}
+.customTable {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid #079992;
+}
+.vl {
+    margin-left: 1rem;
+    border-left: 3px solid #079992;
+    height: 100%;
+}
+.slno {
+    width: 10%;
+}
+.quantity {
+    width: 20%;
+}
+.description {
+    width: 60%;
+}
+table {
+    border: 3px solid #079992;
+    border-collapse: collapse;
+}
+.bigFont {
+    font-size: 1.1rem;
+}
+.companyStyle {
+    border: 1px solid #079992;
+    border-radius: 15px;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+/*table td {
+    border-left: 1px solid #079992;
+    border-right: 1px solid #079992;
+}
+
+table td:first-child {
+    border-left: none;
+}
+
+table td:last-child {
+    border-right: none;
+} */
+.tableValues {
+    padding: 1rem;
+}
+label {
+    margin-right: 1rem;
+    color: #079992;
+    text-decoration: underline;
+}
+.hole {
+    color: #2980b9;
+    font-style: italic;
+    text-decoration: underline;
+}
+.stamp {
+    border: 2px solid #079992;
+    padding: 1rem;
+    border-radius: 5px;
+}
+hr {
+    border: 2px solid #079992;
+}
+input {
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    background-color: #fff;
+}
+input:focus {
+    outline: none;
+}
+
+.input {
+    display: inline;
+    word-wrap: break-word;
+}
+@media print {
+    html, body {
+        width: 210mm;
+        height: 297mm;
+        overflow: visible;
+        font-size: 0.9rem;
+    }
+
+    .printer {
+        /* border: 1px solid #079992; */
+        padding: 1rem !important;
+        /* margin-right: 2rem; */
+    }
+
+
+    .down {
+        margin-bottom: 3rem !important;
+    }
+    .sl {
+        margin-left: 2.5rem !important;
+    }
+    /* ... the rest of the rules ... */
+}

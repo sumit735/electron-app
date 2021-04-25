@@ -2,15 +2,15 @@ const { getAllProducts, deleteProduct }  = require('../knex');
 const remote = require('@electron/remote');
 
 
-// select Product
-const selectProduct = (id) => {
+// edit Product
+const editProduct = (id) => {
     console.log('from view ',id);
     try {
-        ipcRenderer.send('renderer',{type: 'selectProduct', id});
+        ipcRenderer.send('renderer',{type: 'editProduct', id});
   
     } catch(e) {
         console.log('exception', e);
-        document.querySelector('.error').innerHTML = "<p class='alert alert-danger'>Sorry! Failed to Set</p>"
+        document.querySelector('.error').innerHTML = "<p class='alert alert-danger'>Sorry! Failed to Select</p>"
     }
 }
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     rows += "<td>"+ unit +"</td>";
                     rows += "<td>"+ weight +"</td>";
                     rows += "<td>"+ freight +"</td>";
-                    rows += `<td><a style='margin-right: 5%' class='btn btn-danger' onclick='deleteProductDb(${id})'><i class='far fa-trash-alt'></i></a><a class='btn btn-success' onclick='selectProduct(${id})'><i class='far fa-check-circle'></i></a></td>`;
+                    rows += `<td><a style='margin-right: 5%' class='btn btn-danger' onclick='deleteProductDb(${id})'><i class='far fa-trash-alt'></i></a><a class='btn btn-success' onclick='editProduct(${id})'><i class='far fa-check-circle'></i></a></td>`;
                     rows += "</tr>";
                     slno++;
                 });

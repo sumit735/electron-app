@@ -3,6 +3,9 @@ const ipcRenderer = require('electron').ipcRenderer;
 function createBrowserWindow() {
   ipcRenderer.send('renderer', 'createNewWindow');
 }
+function viewAllReceipts() {
+  ipcRenderer.send('renderer', 'viewAllReceipts');
+}
 function addConsigner() {
   ipcRenderer.send('renderer', 'addConsigner');
 }

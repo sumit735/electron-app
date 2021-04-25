@@ -1,9 +1,8 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, dialog } = require('electron');
 const path = require('path');
 require('@electron/remote/main').initialize();
-
+const fs = require('fs');
 const ipcMain = require('electron').ipcMain;
-
 
 // listen from render process
 ipcMain.on('renderer', (evt, message) => {
@@ -26,7 +25,28 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    // addReceiptWindow.removeMenu();
     addReceiptWindow.loadFile(path.join(__dirname, '/public/addReceipt.html'));
+  }
+  if(message == 'viewAllReceipts') {
+    viewReceiptWindow = new BrowserWindow({
+      width: 1366,
+      height: 768,
+      minHeight: 711,
+      minWidth: 608,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    });
+  
+    // and load the index.html of the app.
+    // viewReceiptWindow.removeMenu();
+    viewReceiptWindow.loadFile(path.join(__dirname, '/public/viewReceipt.html'));
   }
   if(message == 'addConsigner') {
     // this one is manage consigner. add one is below this
@@ -46,6 +66,7 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    viewConsigner.removeMenu();
     viewConsigner.loadFile(path.join(__dirname, '/public/addConsigner.html'));
   }
   if(message == 'addNewConsigner') {
@@ -65,6 +86,7 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    addNewConsigner.removeMenu();
     addNewConsigner.loadFile(path.join(__dirname, '/public/addNewConsigner.html'));
   }
   if(message == 'viewConsignee') {
@@ -85,6 +107,7 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    viewconsignee.removeMenu();
     viewconsignee.loadFile(path.join(__dirname, '/public/viewConsignee.html'));
   }
   if(message == 'addNewconsignee') {
@@ -104,29 +127,12 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    addNewconsignee.removeMenu();
     addNewconsignee.loadFile(path.join(__dirname, '/public/addNewconsignee.html'));
   }
-  if(message == 'editCompany') {
-    const editCompanyWindow = new BrowserWindow({
-      width: 500,
-      height: 700,
-      minHeight: 500,
-      minWidth: 700,
-      webPreferences: {
-        nodeIntegration: true,
-        nodeIntegrationInSubFrames: true,
-        enableRemoteModule: true,
-        nodeIntegrationInWorker: true,
-        contextIsolation: false,
-        sandbox: false
-      }
-    });
   
-    // and load the index.html of the app.
-    editCompanyWindow.loadFile(path.join(__dirname, '/public/editCompany.html'));
-  }
   if(message == 'addTransport') {
-    const addWindow = new BrowserWindow({
+    addTransportWindow = new BrowserWindow({
       width: 500,
       height: 700,
       minHeight: 500,
@@ -142,7 +148,8 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
-    addWindow.loadFile(path.join(__dirname, '/public/addTransport.html'));
+    // addTransportWindow.removeMenu();
+    addTransportWindow.loadFile(path.join(__dirname, '/public/addTransport.html'));
   }
   if(message == 'viewProduct') {
     viewProducts = new BrowserWindow({
@@ -161,6 +168,7 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    viewProducts.removeMenu();
     viewProducts.loadFile(path.join(__dirname, '/public/viewProduct.html'));
   }
   if(message == 'addNewProduct') {
@@ -180,7 +188,37 @@ ipcMain.on('renderer', (evt, message) => {
     });
   
     // and load the index.html of the app.
+    addNewProduct.removeMenu();
     addNewProduct.loadFile(path.join(__dirname, '/public/addNewProduct.html'));
+  }
+
+  if(message.type == 'editProduct') {
+    editProductWindow = new BrowserWindow({
+      width: 500,
+      height: 700,
+      minHeight: 500,
+      minWidth: 700,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    });
+  
+    // and load the index.html of the app.
+    console.log('brefore');
+
+    editProductWindow.removeMenu();
+    editProductWindow.loadFile(path.join(__dirname, '/public/editProduct.html'));
+    editProductWindow.webContents.on('did-finish-load', function () {
+      editProductWindow.webContents.send('editproductdetails', message);
+    });
+
+    console.log('after', message);
+
   }
 
   if(message.type == 'selectConsigner') {
@@ -191,10 +229,7 @@ ipcMain.on('renderer', (evt, message) => {
     viewconsignee.close();
     addReceiptWindow.webContents.send('oldConsigneeDetails', message);
   }
-  if(message.type == 'selectProduct') {
-    viewProducts.close();
-    addReceiptWindow.webContents.send('oldProductDetails', message);
-  }
+  
 
 });
 
@@ -202,9 +237,6 @@ ipcMain.on('renderer', (evt, message) => {
 // Send Stuff to add receipt page
 // ====================================
 
-ipcMain.on('companyDetails', (event, payload) => {
-  addReceiptWindow.webContents.send('companyDetails', payload);
-});
 ipcMain.on('consignerDetails', (event, consignerPayload) => {
   viewConsigner.close();
   addReceiptWindow.webContents.send('consignerDetails', consignerPayload);
@@ -217,7 +249,222 @@ ipcMain.on('productDetails', (event, productPayload) => {
   viewProducts.close();
   addReceiptWindow.webContents.send('productDetails', productPayload);
 });
+ipcMain.on('selectProduct', (event, productPayload) => {
+  console.log('here', productPayload);
+  viewProducts.close();
+  addReceiptWindow.webContents.send('oldProductDetails', productPayload);
+});
+ipcMain.on('transportDetails', (event, transportPayload) => {
+  addReceiptWindow.webContents.send('transportDetails', transportPayload);
+});
 
+// ! TODO - Download part
+ipcMain.on('download', (event, id) => {
+  console.log('inside download');
+  window_to_PDF = new BrowserWindow(
+    {
+      show: false,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    }
+  );//to just open the browser in background { show: false }
+  window_to_PDF.loadFile(path.join(__dirname, '/public/receiptPrint.html')); //give the file link you want to display
+  function pdfSettings() {
+    var paperSizeArray = ["A4"];
+    var option = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: false,
+      printSelectionOnly: false,
+      pageSize: paperSizeArray[0],
+    };
+    return option;
+  }
+  window_to_PDF.webContents.on('did-finish-load', async function () {
+    window_to_PDF.webContents.send('pdfInit', id);
+    console.log('loaded. now print');
+    const { filePath } = await dialog.showSaveDialog({
+      defaultPath: `SB-${Date.now()}.pdf`
+    })
+    console.log('path is ',filePath);
+    window_to_PDF.webContents.printToPDF(pdfSettings()).then(data => {
+      console.log('inside print pdf');
+      fs.writeFile(filePath, data, (error) => {
+        if (error) {
+          console.log(error);
+          addReceiptWindow.webContents.send('pdfDownload', 'failed');
+
+        }
+        console.log(`Wrote PDF successfully to ${filePath}`);
+        addReceiptWindow.webContents.send('pdfDownload', 'success');
+      })
+    }).catch(err => {
+      //unable to save pdf..
+      console.log('error',err);
+      addReceiptWindow.webContents.send('pdfDownload', 'failed');
+
+    })
+  });
+  
+});
+ipcMain.on('viewReceiptDownload', (event, id) => {
+  console.log('inside download');
+  window_to_PDF = new BrowserWindow(
+    {
+      show: false,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    }
+  );//to just open the browser in background { show: false }
+  window_to_PDF.loadFile(path.join(__dirname, '/public/receiptPrint.html')); //give the file link you want to display
+  function pdfSettings() {
+    var paperSizeArray = ["A4"];
+    var option = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: false,
+      printSelectionOnly: false,
+      pageSize: paperSizeArray[0],
+    };
+    return option;
+  }
+  window_to_PDF.webContents.on('did-finish-load', async function () {
+    window_to_PDF.webContents.send('pdfInit', id);
+    console.log('loaded. now print');
+    const { filePath } = await dialog.showSaveDialog({
+      defaultPath: `SB-${Date.now()}.pdf`
+    })
+    console.log('path is ',filePath);
+    window_to_PDF.webContents.printToPDF(pdfSettings()).then(data => {
+      console.log('inside print pdf');
+      fs.writeFile(filePath, data, (error) => {
+        if (error) {
+          console.log(error);
+          viewReceiptWindow.webContents.send('pdfDownload', 'failed');
+
+        }
+        console.log(`Wrote PDF successfully to ${filePath}`);
+        viewReceiptWindow.webContents.send('pdfDownload', 'success');
+      })
+    }).catch(err => {
+      //unable to save pdf..
+      console.log('error',err);
+      viewReceiptWindow.webContents.send('pdfDownload', 'failed');
+
+    })
+  });
+  
+});
+
+// ! TODO - Print Part
+ipcMain.on('print', (event, id) => {
+  console.log('inside print');
+  printWindow = new BrowserWindow(
+    {
+      show: false,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    }
+  );//to just open the browser in background { show: false }
+  printWindow.loadFile(path.join(__dirname, '/public/receiptPrint.html')); //give the file link you want to display
+  function pdfSettings() {
+    var paperSizeArray = ["A4"];
+    var option = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: false,
+      printSelectionOnly: false,
+      pageSize: paperSizeArray[0],
+    };
+    return option;
+  }
+  printWindow.webContents.on('did-finish-load', async function () {
+    printWindow.webContents.send('pdfInit', id);
+    console.log('loaded. now print');
+    let options = {
+      silent: false,
+      printBackground: true,
+      color: true,
+      margin: {
+        marginType: 'printableArea'
+      },
+      landscape: false,
+      collate: false,
+    }
+    printWindow.webContents.print(options, (success, failureReason) => {
+      if (!success) addReceiptWindow.webContents.send('print', {status: 'failed', failureReason});
+
+      addReceiptWindow.webContents.send('print', {status: 'success', success})
+    });
+  });
+  
+});
+ipcMain.on('viewReceiptPrint', (event, id) => {
+  console.log('inside print');
+  printWindow = new BrowserWindow(
+    {
+      show: false,
+      webPreferences: {
+        nodeIntegration: true,
+        nodeIntegrationInSubFrames: true,
+        enableRemoteModule: true,
+        nodeIntegrationInWorker: true,
+        contextIsolation: false,
+        sandbox: false
+      }
+    }
+  );//to just open the browser in background { show: false }
+  printWindow.loadFile(path.join(__dirname, '/public/receiptPrint.html')); //give the file link you want to display
+  function pdfSettings() {
+    var paperSizeArray = ["A4"];
+    var option = {
+      landscape: false,
+      marginsType: 0,
+      printBackground: false,
+      printSelectionOnly: false,
+      pageSize: paperSizeArray[0],
+    };
+    return option;
+  }
+  printWindow.webContents.on('did-finish-load', async function () {
+    printWindow.webContents.send('pdfInit', id);
+    console.log('loaded. now print');
+    let options = {
+      silent: false,
+      printBackground: true,
+      color: true,
+      margin: {
+        marginType: 'printableArea'
+      },
+      landscape: false,
+      collate: false,
+    }
+    printWindow.webContents.print(options, (success, failureReason) => {
+      if (!success) viewReceiptWindow.webContents.send('print', {status: 'failed', failureReason});
+
+      viewReceiptWindow.webContents.send('print', {status: 'success', success})
+    });
+  });
+  
+});
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
   app.quit();
@@ -240,6 +487,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
+  // mainWindow.removeMenu();
   mainWindow.loadFile(path.join(__dirname, '/public/index.html'));
 
 };

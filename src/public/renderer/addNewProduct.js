@@ -1,6 +1,7 @@
 const { addProductDb, getAllProducts }  = require('../knex');
 const remote = require('@electron/remote');
 
+
 const calculateFreightCharge = () => {
     let weightInput = document.getElementById('weight').value;
     let rateInput = document.getElementById('rate').value;
@@ -16,6 +17,7 @@ const calculateFreightCharge = () => {
     
     document.getElementById('freight').value = freightCharge.toFixed(2);
 }
+
 
 document.addEventListener('DOMContentLoaded', async () => {
 

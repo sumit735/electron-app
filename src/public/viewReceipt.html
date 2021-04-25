@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add Consigner</title>
+    <link rel="stylesheet" href="./dist/fontawesome/all.min.css" />
+    <script src="./dist/fontawesome/all.min.js"></script>
+    <link href="./dist/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./dist/notyf/notyf.min.css" rel="stylesheet">
+    <script src="./dist/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./dist/notyf/notyf.min.js"></script>
+    <script src="./renderer/renderrer.js"></script>
+    <script src="./renderer/viewReceipt.js"></script>
+    <link href="./dist/datatables/vanilla-dataTables.min.css" rel="stylesheet" type="text/css">
+    <script src="./dist/datatables/vanilla-dataTables.min.js" type="text/javascript"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .customSpace {
+            width: 100%;
+            height: 10rem;
+            background-color: #079992;
+            border-radius: 0 0 5px 5px;
+        }
+        #add {
+            font-size: 1.5rem;
+            /* margin-top: 2.3rem; */
+            cursor: pointer;
+
+        }
+
+        .custom {
+            padding: 8px;
+            background: #079992;
+            color: #fff;
+            font-size: 1.3rem;
+            border-radius: 5px;
+        }
+        .icon {
+            margin-left: 1rem;
+        }
+        span {
+            margin-left: 1rem;
+        }
+        .radio {
+            display: inline;
+        }
+
+        textarea {
+            width: 100%;
+            border-top: 0px;
+            border-left: 0px;
+            border-right: 0px;
+            color: #079992;
+            font-size: 1.3rem;
+            min-height: 92px;
+            max-height: 92px;
+        }
+        textarea:focus {
+            outline: none !important;
+            border-color: #079992;
+            box-shadow: 0 0 10px #079992;
+        }
+        canvas#signature {
+            border: 2px solid black;
+        }
+        .btn-success {
+            background-color: #1dd1a1;
+        }
+
+        .btn-success:hover {
+            background-color: #10ac84;
+        }
+        .customWidth {
+            width: 20%;
+        }
+
+        .btn-warning {
+            background-color: #3498db;
+            color: #fff;
+            border: #3498db;
+        }
+        
+        .btn-warning:hover {
+            background-color: #2980b9;
+            color: #fff;
+            border: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="customSpace">
+        <h1 class="text-center">View All Receipts</h1>
+    </div>
+    <div class="mt-2 error container"></div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="mb-3 col-lg-12 col-md-12 col-sm-12">
+                <button onclick="createBrowserWindow()" class="btn btn-success">Create A New Receipt</button>
+            </div>
+        </div>
+        <table id="example" class="display table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Receipt No</th>
+                    <th>Consigner Name</th>
+                    <th>Consignee Name</th>
+                    <th>Freight Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="productTbody">
+                
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Sl No</th>
+                    <th>Receipt No</th>
+                    <th>Consigner Name</th>
+                    <th>Consignee Name</th>
+                    <th>Freight Amount</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    
+</body>
+</html>

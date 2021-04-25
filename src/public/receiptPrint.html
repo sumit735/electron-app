@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Print Receipt</title>
+    <link rel="stylesheet" href="./dist/fontawesome/all.min.css" />
+    <script src="./dist/fontawesome/all.min.js"></script>
+    <link href="./dist/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="./dist/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="./renderer/renderrer.js"></script>
+    <script src="./renderer/receiptPrint.js"></script>
+    <link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+    <div class="printer">
+        
+        <div class="main row">
+            <div class="text-left col-md-3 col-sm-3 top logo">
+                <img src="./dist/images/logo.png" style="width: 150px; height: 50px;" alt="">
+            </div>
+            <div class="text-center col-md-6 col-sm-6 companyHeader">
+                <h3 style="text-transform: uppercase;">S.B.R Transport Company</h3>
+                <p class="companyStyle">Truck Supplier & Commision Agent</p>
+                <p>Shanti Nagar, Ward No. 1</p>
+                <p>Barpeta Road, Barpeta (Assam)</p>
+                <p>Pin-<span class="number">781315</span></p>
+                <p>Mobile- <span class="number">+91-7002581548, +91-9435124875</span></p>
+                <h5 class="bold">GSTIN- <span class="number">18CEKPRT618H1ZX</span></h5>
+            </div>
+            
+            <div class="text-right col-md-3 col-sm-3 top">
+                <p class="right"><img src="./dist/images/truck.png" style="width: 50px; height: 50px;" alt=""> Bilty</p>
+                <p>Receipt Number- <span class="number" id="receiptNumber"></span></p>
+                <p style="margin-right: 1.9rem">Date- <span class="number" id="date"></span></p>
+            </div>
+        </div>
+
+        <div class="fromTo row">
+            <div class="col-sm-5 col-md-5">
+                <label class="bigFont" for="source">From:</label>
+                <p class="bigFont border" name="source" id="source"></p><br>
+                <label class="bigFont" for="eway">Eway Bill No:</label>
+                <p class="bigFont border number" name="eway" id="eway"></p>
+            </div>
+            
+            <div class="col-sm-5 col-md-5 offset-sm-2">
+                <div style="margin-right: 20px;" class="form-group">
+                    <label class="bigFont" for="destination">To:</label>
+                    <p class="bigFont border" name="destination" id="destination"></p><br>
+                
+                </div>
+                <div style="margin-right: 5.5rem;" class="form-group">
+                    <label class="bigFont" for="lorryNumber">Lorry No:</label>
+                    <p class="bigFont input number" name="lorryNumber" id="lorryNumber"></p>
+                </div>
+                
+            </div>
+            
+        </div>
+        <div class="fromTo row">
+            <div class="stamp col-md-5 col-sm-5">
+                <div class="form-group">
+                    <label for="consigner">Consigner:</label>
+                    <p class="input" name="consigner" id="consigner"></p>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <p class="input" name="consignerAddress" id="consignerAddress"></p>
+                </div>
+                <div class="form-group">
+                    <label for="State">State:</label>
+                    <p class="input" name="consignerState" id="consignerState"></p>
+                </div><hr>
+                <div class="form-group">
+                    <label for="gst">GSTIN:</label>
+                    <p class="input number" name="consignergst" id="consignerGst"></p>
+                </div>
+            </div>
+            <div class="stamp consignee consignee col-md-5 col-sm-5 offset-sm-2">
+                <div class="form-group">
+                    <label for="consignee">Consignee:</label>
+                    <p class="input" name="consignee" id="consignee"></p>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <p class="input" name="address" id="consigneeAddress"></p>
+                </div>
+                <div class="form-group">
+                    <label for="consigneeState">State:</label>
+                    <p class="input" name="consigneeState" id="consigneeState"></p>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="gst">GSTIN:</label>
+                    <p class="input number" name="consigneegst" id="consigneeGst"></p>
+                </div>
+            </div>
+            
+        </div>
+        <div class="fromTo row">
+            <div class="customTable col-md-12 col-sm-12">
+                <div class="col-md-6 col-sm-6">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="slno" scope="col">SL no</th>
+                                <th class="quantity" scope="col">Quantity</th>
+                                <th style="text-align: center;" class="description" scope="col">Description</th>
+                                <th class="quantity" scope="col">Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody id="productTable"></tbody>
+                    </table>
+                </div>
+                <div class="vl"></div>
+                <div class="col-md-6 col-sm-6 tableValues">
+                    <div class="form-group spacing">
+                        <label for="weightTotal">Total Weight:</label>
+                        <p class="input number" name="weightTotal" id="weightTotal"></p>
+                    </div>
+                    <div class="form-group spacing">
+                        <label for="bagTotal">Total Bags:</label>
+                        <p class="input number" name="weightTotal" id="bagTotal"></p>
+                    </div>
+                    <div class="form-group spacing">
+                        <label for="freightTotal">Total Freight:</label>
+                        <p class="input number" name="freightTotal" id="freightTotal"></p>
+                    </div>
+                    <div class="form-group spacing">
+                        <label for="advance">Advance:</label>
+                        <p class="input number" name="advance" id="advance"></p>
+                    </div>
+                    <div class="form-group spacing">
+                        <label for="amountToBePaid">Amount To Be Paid:</label>
+                        <p class="input number" name="amountToBePaid" id="amountToBePaid"></p>
+                    </div>
+                    <div class="form-group spacing">
+                        <label for="valueOfGoods">Value Of the Goods:</label>
+                        <p class="input number" name="valueOfGoods" id="valueOfGoods"></p>
+                    </div>
+                </div>
+                
+            </div>
+                
+        </div>
+        
+        
+        <div class="fromTo row">
+            
+            
+            <div class="stamp consignee col-md-12 col-sm-12">
+                <div class="form-group spacing">
+                    <label for="addressOfDelivery spacing">Address Of Delivery :</label>
+                    <p class="input" name="addressOfDelivery" id="addressOfDelivery"></p>
+                </div>
+                
+                <div class="form-group spacing">
+                    <label for="driverName">Driver's Name :</label>
+                    <p class="input" name="driverName" id="driverName"></p>
+                    <label style="margin-left: 20px;" for="dlNumber">Driving License Number :</label>
+                    <p class="input number" name="dlNumber" id="dlNumber"></p>
+                </div>
+                <div class="form-group spacing">
+                    <label for="vehicleOwnerName">Vehicle Owner Name :</label>
+                    <p class="input" name="vehicleOwnerName" id="vehicleOwnerName"></p>
+                    <label style="margin-left: 20px;" for="ownerAddress">Address :</label>
+                    <p class="input" name="ownerAddress" id="ownerAddress"></p>
+                </div>
+
+                <div class="form-group spacing">
+                    <p class="input hole" name="note" id="note">NOTE-: The Amount Of Taxable Goods Will Be Charged 5% Reverse Charges on fair. Non Taxable goods will be exempted as per Goods and Service Tax act 2016</p>
+
+                </div>
+            </div>
+            
+            
+        </div>
+        <div class="fromTo row">
+            
+            <div class="stamp consignee col-md-8 col-sm-8">
+                <div class="form-group">
+                    <label for="transportDetails">TERMS & CONDITIONS:</label>
+                    <hr>
+                </div>
+                <div class="form-group">
+                    <p class="input" name="terms" id="terms">
+                        1. This is an electronically generated lorry Receipt.<br>
+                        2. All disputes are subjected to Barpeta Jurisdiction.
+                    </p>
+                </div>
+                
+                
+            </div>
+            <div class="stamp consignee col-md-4 col-sm-4">
+                <div class="down form-group">
+                    <p class="sl input text-center" name="vehicleNumber" id="vehicleNumber">For SBR Transport Co.</p>
+                </div>
+                <div class="sl form-group">
+                    <p class="input text-center" name="vehicleNumber" id="vehicleNumber">Authorized Signature</p>
+                </div>
+                
+                
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    
+    
+</body>
+</html>
